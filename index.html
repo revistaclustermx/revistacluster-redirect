@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivo Cluster - Nos mudamos</title>
+    <meta http-equiv="refresh" content="5; url=https://archivocluster.wordpress.com">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: #ffffff;
+            color: #2a2a2a;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0,0,0,0.01) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0,0,0,0.02) 0%, transparent 50%),
+                url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjQiIHNlZWQ9IjIiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMC4wMSIvPjwvc3ZnPg==');
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #fafafa 0%, #ffffff 50%, #fafafa 100%);
+        }
+
+        .logo-container {
+            margin-bottom: 60px;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo-svg {
+            width: 280px;
+            height: 140px;
+            filter: contrast(1.2) brightness(1.1);
+            transition: all 0.4s ease;
+        }
+
+        .logo-svg:hover {
+            filter: contrast(1.4) brightness(1.2);
+            transform: scale(1.02);
+        }
+
+        .logo-normal { 
+            opacity: 1; 
+            transition: opacity 0.5s ease;
+        }
+        
+        .logo-hover { 
+            opacity: 0; 
+            transition: opacity 0.5s ease;
+        }
+        
+        .logo-svg:hover .logo-normal { 
+            opacity: 0; 
+        }
+        
+        .logo-svg:hover .logo-hover { 
+            opacity: 1; 
+        }
+
+        .main-content {
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+        }
+
+        .announcement {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .announcement::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #2a2a2a, transparent);
+        }
+
+        .announcement::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #2a2a2a, transparent);
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            position: relative;
+            background: linear-gradient(135deg, #2a2a2a 0%, #555555 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { 
+                filter: brightness(1);
+                text-shadow: 0 0 20px rgba(42, 42, 42, 0.3);
+            }
+            100% { 
+                filter: brightness(1.1);
+                text-shadow: 0 0 30px rgba(42, 42, 42, 0.5);
+            }
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            line-height: 1.7;
+            color: #555555;
+            margin-bottom: 40px;
+            font-weight: 400;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .period {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #888888;
+            margin-bottom: 50px;
+            letter-spacing: 8px;
+            position: relative;
+        }
+
+        .period::before,
+        .period::after {
+            content: '—';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaaaaa;
+            font-size: 1.2rem;
+        }
+
+        .period::before {
+            left: -40px;
+        }
+
+        .period::after {
+            right: -40px;
+        }
+
+        .controls {
+            position: relative;
+        }
+
+        .progress-container {
+            background: rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            height: 2px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #2a2a2a, #555555);
+            height: 100%;
+            width: 0;
+            animation: progress 5s linear forwards;
+            box-shadow: 0 0 10px rgba(42, 42, 42, 0.5);
+        }
+
+        @keyframes progress {
+            to { width: 100%; }
+        }
+
+        .redirect-text {
+            font-size: 0.9rem;
+            color: #888888;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .manual-link {
+            display: inline-block;
+            background: transparent;
+            color: #2a2a2a;
+            padding: 15px 40px;
+            text-decoration: none;
+            border: 2px solid #2a2a2a;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .manual-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #2a2a2a;
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .manual-link:hover {
+            color: #ffffff;
+        }
+
+        .manual-link:hover::before {
+            left: 0;
+        }
+
+        .loading-dots {
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .loading-dots::after {
+            content: '';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* Scanning line effect */
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #2a2a2a, transparent);
+            animation: scan 4s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
+
+        @media (max-width: 768px) {
+            .logo-svg {
+                width: 220px;
+                height: 110px;
+            }
+            
+            .manual-link {
+                padding: 12px 30px;
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .logo-container {
+                margin-bottom: 40px;
+            }
+            
+            .announcement {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scan-line"></div>
+    
+    <div class="container">
+        <div class="logo-container">
+            <svg class="logo-svg" width="280" height="140" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 223 112">
+                <image class="logo-normal" href="https://static.wixstatic.com/media/d6a01a_18be171e55a8495e9da6f8c32eb71baa~mv2.png/v1/fill/w_223,h_112,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/d6a01a_18be171e55a8495e9da6f8c32eb71baa~mv2.png" width="223" height="112"/>
+                <image class="logo-hover" href="https://static.wixstatic.com/media/d6a01a_d7c65632384847c1bcffea03284f8946~mv2.png/v1/fill/w_128,h_112,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/d6a01a_d7c65632384847c1bcffea03284f8946~mv2.png" width="128" height="112" x="47.5"/>
+            </svg>
+        </div>
+        
+        <div class="main-content">
+            <div class="announcement">
+                <h1 class="main-title">Nos Mudamos</h1>
+                <p class="subtitle">
+                    Bienvenidx al Archivo Cluster. Aquí podrás encontrar todos los textos y números editoriales publicados entre el 2019 y 2024.
+                </p>
+            </div>
+            
+            <div class="controls">
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+                
+                <p class="redirect-text">
+                    Redirigiendo<span class="loading-dots"></span>
+                </p>
+                
+                <a href="https://archivocluster.wordpress.com" class="manual-link">
+                    Entrar al Archivo →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Redirección de respaldo
+        setTimeout(() => {
+            window.location.href = 'https://archivocluster.wordpress.com';
+        }, 5000);
+    </script>
+</body>
+</html>
